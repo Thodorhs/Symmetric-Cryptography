@@ -1,7 +1,6 @@
 import argparse
 from cryptography.hazmat.primitives.ciphers import (Cipher, algorithms, modes)
 import binascii
-import os
 
 def pad_text(text):
     text = text + ((16 - len(text) %16) * b'\0')
