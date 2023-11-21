@@ -8,13 +8,6 @@ def pad_text(text):
 
 def byte_xor(ba1, ba2):
     return bytes([_a ^ _b for _a, _b in zip(ba1, ba2)])
-
-def parse_hexadecimal(s):
-    try:
-        # Convert the hexadecimal string to bytes
-        return binascii.unhexlify(s)
-    except binascii.Error:
-        raise argparse.ArgumentTypeError(f"Invalid hexadecimal value: {s}")
     
 def AES_128_CBC_encrypt(plaintext, key, iv):
     # Create an AES-128-ECB cipher object
@@ -110,9 +103,9 @@ def main():
     if len(plaintext) == 0:
         raise argparse.ArgumentTypeError(f"Invalid plaintext length: {len(plaintext)}")
 
-    bplaintext = parse_hexadecimal(plaintext)
-    bkey = parse_hexadecimal(key)
-    biv = parse_hexadecimal(iv)
+    bplaintext = bytes.fromhex(plaintext)
+    bkey = bytes.fromhex(key)
+    biv = bytes.fromhex(iv)
 
     test(bplaintext, bkey, biv)
     return

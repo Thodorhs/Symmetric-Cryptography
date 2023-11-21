@@ -1,6 +1,6 @@
 import argparse
 from cryptography.hazmat.primitives.ciphers import (Cipher, algorithms, modes)
-from AES_128_CBC import parse_hexadecimal, AES_128_CBC_encrypt, byte_xor
+from AES_128_CBC import AES_128_CBC_encrypt, byte_xor
 
 def AES_random_access(ciphertext, key, iv, index):
     #assert index >= 0
@@ -47,18 +47,18 @@ def main():
         raise argparse.ArgumentTypeError(f"Invalid iv length: {len(iv)}")
     
 
-    bplaintext = parse_hexadecimal(plaintext)
+    bplaintext = bytes.fromhex(plaintext)
     if len(bplaintext) <= 80:
         raise argparse.ArgumentTypeError(f"Invalid plaintext length (lower than 6 blocks): {len(bplaintext)}")
     
-    bkey = parse_hexadecimal(key)
-    biv = parse_hexadecimal(iv)
+    bkey = bytes.fromhex(key)
+    biv = bytes.fromhex(iv)
     cipher = AES_128_CBC_encrypt(bplaintext, bkey, biv)
     test(cipher, bkey, biv, 3)
     test(cipher, bkey, biv, 1)
     test(cipher, bkey, biv, 0)
     return
 
-# a good run test to check python3 AES_128_random_acces.py -p ffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddddddaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa111111111111111111111111111111112222222222222222222222222222222233333333333333333333333333333333 -k 199494cdea9c646e76015c5bd3ffdaec -iv 199494cdea9c646e76015c5bd3ffdaec
+# a good run test to check python3 AES_128_random_access.py -p ffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddddddaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa111111111111111111111111111111112222222222222222222222222222222233333333333333333333333333333333 -k 199494cdea9c646e76015c5bd3ffdaec -iv 199494cdea9c646e76015c5bd3ffdaec
 if __name__ == "__main__":
     main()
