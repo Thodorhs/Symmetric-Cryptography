@@ -21,7 +21,7 @@ def decrypt(ciphertext, key, iv, tag):
         plaintext = decryptor.update(ciphertext) + decryptor.finalize()
         return plaintext
     except InvalidTag as e:
-        print(f"Error: {e}")
+        print(f"Error: Invalid Tag")
         return None
 
 def test(key):
