@@ -73,6 +73,7 @@ def main():
         #example of a run command: python3 AES_128_GCM.py -e -t 54686973206973206120736563726574206d6573736167652e -k 000102030405060708090a0b0c0d0e0f
         ciphertext, iv, tag = encrypt(text, key)
         print(f"Ciphertext: {ciphertext.hex()}")
+        print(f"Key: {key.hex()}")
         print(f"IV: {iv.hex()}")
         print(f"Tag: {tag.hex()}")
 

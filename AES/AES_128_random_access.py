@@ -6,6 +6,7 @@ def AES_random_access(ciphertext, key, iv, index):
     #assert index >= 0
     if index < 0:
         raise argparse.ArgumentTypeError(f"Invalid index: {index}")
+    
     # Create an AES-128-ECB cipher object
     cipher = Cipher(algorithms.AES128(key), modes.ECB())
     depcryptor = cipher.decryptor()
