@@ -4,14 +4,14 @@ import argparse
 import os
 
 def encrypt(plaintext, key):
-    iv = os.urandom(16) # Generate a 128-bit IV randomly
+    iv = os.urandom(12)
     # Create an AES-128-GCM cipher object
     cipher = Cipher(algorithms.AES(key),modes.GCM(iv))
     encryptor = cipher.encryptor()
 
     # Encrypt the plaintext and get the associated ciphertext and tag
     ciphertext = encryptor.update(plaintext) + encryptor.finalize()
-
+    
     return (ciphertext, iv, encryptor.tag)
 
 def decrypt(ciphertext, key, iv, tag):
